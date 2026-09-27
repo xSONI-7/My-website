@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Elite Motors | About Us</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f4f4;
+    color: #333;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 40px 5%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0d0d0d;
+    padding: 15px 5%;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d4af37;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { text-shadow: 0 0 0px #d4af37; }
+    50% { text-shadow: 0 0 10px #d4af37; }
+}
+
+nav ul {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.1);
+    transform: translateY(-2px);
+}
+
+nav ul li a.active {
+    color: #d4af37;
+    border-bottom: 2px solid #d4af37;
+}
+
+.user-welcome {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(212, 175, 55, 0.15);
+    padding: 5px 15px;
+    border-radius: 40px;
+}
+
+.user-welcome span {
+    color: #d4af37;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #ff4444;
+    color: white;
+}
+
+.page-header {
+    position: relative;
+    height: 40vh;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.page-header-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.page-header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7));
+    z-index: 1;
+}
+
+.page-header .page-header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header h1 {
+    font-size: 48px;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease;
+}
+
+.page-header p {
+    font-size: 18px;
+    margin-top: 15px;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.about-intro {
+    background: white;
+    text-align: center;
+}
+
+.about-intro h2 {
+    font-size: 32px;
+    color: #1e1e1e;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-intro h2:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.about-intro p {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    color: #555;
+    font-size: 16px;
+}
+
+.mission-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.mv-card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    border-bottom: 3px solid #d4af37;
+}
+
+.mv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+}
+
+.mv-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.mv-card h3 {
+    font-size: 24px;
+    color: #1e1e1e;
+    margin-bottom: 15px;
+}
+
+.mv-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.story-section {
+    background: #f8f9fa;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+.story-text h3 {
+    font-size: 28px;
+    color: #1e1e1e;
+    margin-bottom: 20px;
+}
+
+.story-text p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.story-image {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: 0.5s;
+}
+
+.story-image:hover img {
+    transform: scale(1.03);
+}
+
+.values-section {
+    background: white;
+    text-align: center;
+}
+
+.values-section h2 {
+    font-size: 32px;
+    color: #1e1e1e;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.values-section h2:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.value-card {
+    padding: 25px 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.value-card:hover {
+    background: #d4af37;
+    color: white;
+    transform: translateY(-5px);
+}
+
+.value-card:hover .value-icon,
+.value-card:hover h4,
+.value-card:hover p {
+    color: white;
+}
+
+.value-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.value-card h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #1e1e1e;
+}
+
+.value-card p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.team-section {
+    background: #f0f2f5;
+    text-align: center;
+}
+
+.team-section h2 {
+    font-size: 32px;
+    color: #1e1e1e;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.team-section h2:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 35px;
+    margin-top: 45px;
+}
+
+.team-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+}
+
+.team-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.team-info {
+    padding: 20px;
+}
+
+.team-info h4 {
+    font-size: 18px;
+    color: #1e1e1e;
+    margin-bottom: 5px;
+}
+
+.team-info p {
+    color: #d4af37;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.team-info small {
+    color: #777;
+    font-size: 12px;
+    display: block;
+}
+
+.stats-section {
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    color: white;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stat-card {
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 42px;
+    font-weight: bold;
+    color: #d4af37;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.testimonials-section {
+    background: white;
+    text-align: center;
+}
+
+.testimonials-section h2 {
+    font-size: 32px;
+    color: #1e1e1e;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.testimonials-section h2:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.testimonial-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.testimonial-stars {
+    color: #d4af37;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: #1e1e1e;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #d4af37, #b8962f);
+    text-align: center;
+    color: #111;
+}
+
+.cta-section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    max-width: 600px;
+    margin: 0 auto 25px;
+    font-size: 16px;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 12px 35px;
+    background: #111;
+    color: #d4af37;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cta-btn:hover {
+    background: white;
+    color: #111;
+    transform: scale(1.05);
+}
+
+footer {
+    background: #0d0d0d;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    nav { flex-direction: column; gap: 10px; padding: 12px 5%; }
+    .logo { font-size: 22px; }
+    nav ul { gap: 8px; justify-content: center; }
+    nav ul li a { padding: 6px 10px; font-size: 12px; }
+    .page-header h1 { font-size: 32px; }
+    .page-header p { font-size: 14px; }
+    .about-intro h2, .values-section h2, .team-section h2, .testimonials-section h2 { font-size: 26px; }
+    .stat-number { font-size: 32px; }
+    .story-grid { grid-template-columns: 1fr; }
+    .story-image { order: -1; }
+}
+
+@media (max-width: 480px) {
+    .page-header { height: 30vh; min-height: 220px; }
+    .page-header h1 { font-size: 24px; }
+    .about-intro p { font-size: 14px; }
+    .mv-card { padding: 25px 20px; }
+    .team-img { height: 200px; }
+    .cta-section h2 { font-size: 24px; }
+    footer { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<script>
+(function checkAuthAndRedirect() {
+    const isLoggedIn = localStorage.getItem("eliteMotorsLoggedIn");
+    if (isLoggedIn !== "true") {
+        window.location.href = "Login.html";
+    }
+})();
+
+function logout() {
+    localStorage.removeItem("eliteMotorsLoggedIn");
+    localStorage.removeItem("eliteMotorsUser");
+    localStorage.removeItem("eliteMotorsEmail");
+    window.location.href = "Login.html";
+}
+
+function displayWelcome() {
+    const userName = localStorage.getItem("eliteMotorsUser");
+    const navUl = document.querySelector('nav ul');
+    if (userName && navUl) {
+        const welcomeDiv = document.createElement('div');
+        welcomeDiv.className = 'user-welcome';
+        welcomeDiv.innerHTML = `<span>👋 Welcome, ${userName}!</span><button class="logout-btn" onclick="logout()">Logout</button>`;
+        navUl.appendChild(welcomeDiv);
+    }
+}
+</script>
+
+<nav>
+<div class="logo">💰 Elite Motors</div>
+<ul>
+<li><a href="login.html">🔑 LOGIN</a></li>
+<li><a href="Home.html">🏠 HOME</a></li>
+<li><a href="Cars&Motorbike.html">🚗 CARS & BIKES</a></li>
+<li><a href="About us.html" class="active">ℹ️ ABOUT US</a></li>
+<li><a href="Contact.html">📞 CONTACT</a></li>
+</ul>
+</nav>
+
+<script>displayWelcome();</script>
+
+<div class="page-header">
+    <video class="page-header-video" autoplay muted loop playsinline>
+        <source src="lau.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+        <h1>About Elite Motors</h1>
+        <p>Your Trusted Partner in Luxury Automotive Excellence</p>
+    </div>
+</div>
+
+<section class="about-intro">
+    <h2>Who We Are</h2>
+    <p style="margin-top: 20px;">Founded in 2010, Elite Motors has grown from a small boutique dealership to one of the most respected names in luxury car and motorcycle sales. With showrooms across three continents and a digital presence that reaches customers worldwide, we pride ourselves on delivering exceptional vehicles and unparalleled service.</p>
+    <p style="margin-top: 15px;">Our passion for engineering excellence and our commitment to customer satisfaction have made us the preferred choice for discerning enthusiasts who demand nothing but the best.</p>
+</section>
+
+<section>
+    <div class="mission-vision">
+        <div class="mv-card"><div class="mv-icon">🎯</div><h3>Our Mission</h3><p>To provide automotive enthusiasts with access to the world's finest luxury cars and hyperbikes, backed by transparent pricing, expert guidance, and white-glove service from purchase to delivery.</p></div>
+        <div class="mv-card"><div class="mv-icon">👁️</div><h3>Our Vision</h3><p>To become the global benchmark for luxury vehicle sales, setting new standards in customer experience, vehicle curation, and after-sales support across both four wheels and two.</p></div>
+        <div class="mv-card"><div class="mv-icon">💎</div><h3>Our Promise</h3><p>Every vehicle we sell undergoes rigorous inspection. Every customer receives personalized attention. Every transaction is handled with integrity and professionalism.</p></div>
+    </div>
+</section>
+
+<section class="story-section">
+    <div class="story-grid">
+        <div class="story-text">
+            <h3>Our Journey</h3>
+            <p>Elite Motors began in a small showroom with just five cars and a dream. Founder Michael Chen, a lifelong automotive enthusiast, saw an opportunity to bridge the gap between luxury manufacturers and buyers who wanted a more personalized purchasing experience.</p>
+            <p>Over the past 14 years, we've expanded our inventory to include over 200 premium vehicles and 50+ hyperbikes, established partnerships with leading brands like BMW, Mercedes-Benz, Lamborghini, Ducati, and Kawasaki, and built a team of 45+ automotive experts.</p>
+            <p>Today, we're proud to have delivered over 5,000 dream cars and bikes to satisfied customers across 30+ countries.</p>
+        </div>
+    </div>
+</section>
+
+<section class="values-section">
+    <h2>Our Core Values</h2>
+    <p style="color:#666; margin-top: 10px;">The principles that guide everything we do</p>
+    <div class="values-grid">
+        <div class="value-card"><div class="value-icon">🔍</div><h4>Integrity</h4><p>Honest dealings, transparent pricing, and no hidden fees.</p></div>
+        <div class="value-card"><div class="value-icon">⭐</div><h4>Excellence</h4><p>We only stock the finest vehicles and provide service that exceeds expectations.</p></div>
+        <div class="value-card"><div class="value-icon">🤝</div><h4>Customer First</h4><p>Your satisfaction is our priority. We're with you every step of the journey.</p></div>
+        <div class="value-card"><div class="value-icon">🌍</div><h4>Global Reach</h4><p>Serving customers worldwide with safe, insured international delivery.</p></div>
+        <div class="value-card"><div class="value-icon">🔧</div><h4>Expertise</h4><p>Our team brings decades of combined automotive knowledge to every interaction.</p></div>
+        <div class="value-card"><div class="value-icon">💚</div><h4>Passion</h4><p>We're car and bike enthusiasts first. This isn't just business—it's our life.</p></div>
+    </div>
+</section>
+
+<section class="team-section">
+    <h2>Meet Our Leadership</h2>
+    <p style="color:#666; margin-top: 10px;">The passionate experts behind Elite Motors</p>
+    <div class="team-grid">
+        <div class="team-card"><img src="me4.png" alt="CEO" class="team-img"><div class="team-info"><h4>KIDUS G/YOHANNES</h4><p>Founder & CEO</p><small>20+ years in luxury automotive</small></div></div>
+        <div class="team-card"><img src="BE.png" alt="Sales Director" class="team-img"><div class="team-info"><h4>BIRUK ENIYEW</h4><p>Director of Sales</p><small>Former Ferrari brand specialist</small></div></div>
+        <div class="team-card"><img src="YE.png" alt="Operations" class="team-img"><div class="team-info"><h4>YIDDIDIYA ESHETU</h4><p>Operations Manager</p><small>Logistics & delivery expert</small></div></div>
+        <div class="team-card"><img src="RM.png" alt="Customer Experience" class="team-img"><div class="team-info"><h4>REMLA ENDRIS</h4><p>Customer Experience</p><small>10 years in luxury retail</small></div></div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-card"><div class="stat-number">5,000+</div><div class="stat-label">Happy Customers</div></div>
+        <div class="stat-card"><div class="stat-number">30+</div><div class="stat-label">Countries Served</div></div>
+        <div class="stat-card"><div class="stat-number">250+</div><div class="stat-label">Vehicles in Stock</div></div>
+        <div class="stat-card"><div class="stat-number">45+</div><div class="stat-label">Team Members</div></div>
+        <div class="stat-card"><div class="stat-number">14</div><div class="stat-label">Years of Excellence</div></div>
+    </div>
+</section>
+
+<section class="testimonials-section">
+    <h2>What Our Customers Say</h2>
+    <p style="color:#666; margin-top: 10px;">Real experiences from real enthusiasts</p>
+    <div class="testimonial-grid">
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"Elite Motors made buying my dream Lamborghini effortless. The team was professional, transparent, and genuinely cared about my experience."</div><div class="testimonial-author">— James Whitfield</div></div>
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"I purchased my Ducati Panigale V4 from Elite Motors. The entire process—from selection to delivery—was smooth and exciting."</div><div class="testimonial-author">— Maria Santos</div></div>
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text">"The attention to detail at Elite Motors is unmatched. They helped me find a rare BMW M4 Competition with exact specifications."</div><div class="testimonial-author">— David Kim</div></div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2>Ready to Drive Your Dream?</h2>
+    <p>Visit our showroom, schedule a test ride, or browse our online collection today.</p>
+    <a href="Cars&Motorbike.html" class="cta-btn">Explore Our Collection →</a>
+</section>
+
+<footer>© 2026 Elite Motors | Luxury Cars & Hyperbikes Sales Center | Your Dream Ride Awaits!</footer>
+
+</body>
+</html>

@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Elite Motors | Cars & Motorcycles Collection</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f4f4;
+    color: #333;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 40px 5%;
+}
+
+@keyframes happyShake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes bounceCelebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); background: #4CAF50; }
+    100% { transform: scale(1); }
+}
+
+@keyframes confettiPop {
+    0% { opacity: 1; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
+.shake-celebrate { animation: happyShake 0.5s ease-in-out 0s 2; }
+.bounce-effect { animation: bounceCelebrate 0.6s ease; }
+
+.confetti-particle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #d4af37;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    animation: confettiPop 1.5s ease-out forwards;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0d0d0d;
+    padding: 15px 5%;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d4af37;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { text-shadow: 0 0 0px #d4af37; }
+    50% { text-shadow: 0 0 10px #d4af37; }
+}
+
+nav ul {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.1);
+    transform: translateY(-2px);
+}
+
+nav ul li a.active {
+    color: #d4af37;
+    border-bottom: 2px solid #d4af37;
+}
+
+.user-welcome {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(212, 175, 55, 0.15);
+    padding: 5px 15px;
+    border-radius: 40px;
+}
+
+.user-welcome span {
+    color: #d4af37;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #ff4444;
+    color: white;
+}
+
+.video-header {
+    position: relative;
+    height: 50vh;
+    min-height: 300px;
+    overflow: hidden;
+}
+
+#realCarVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.header-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    width: 100%;
+    padding: 0 20px;
+}
+
+.header-overlay h1 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease;
+}
+
+.header-overlay p {
+    font-size: 16px;
+    margin-top: 10px;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    color: #1e1e1e;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.section-title p {
+    color: #666;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.filters {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filters button {
+    margin: 0;
+    padding: 8px 14px;
+    border: none;
+    background: #111;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 13px;
+}
+
+.filters button:hover {
+    background: #d4af37;
+    transform: scale(1.05);
+}
+
+.cars-grid, .bikes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.car-card, .bike-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardReveal 0.6s ease forwards;
+}
+
+.car-card:nth-child(1){animation-delay:0.05s;}
+.car-card:nth-child(2){animation-delay:0.1s;}
+.car-card:nth-child(3){animation-delay:0.15s;}
+.car-card:nth-child(4){animation-delay:0.2s;}
+.car-card:nth-child(5){animation-delay:0.25s;}
+.car-card:nth-child(6){animation-delay:0.3s;}
+.car-card:nth-child(7){animation-delay:0.35s;}
+.car-card:nth-child(8){animation-delay:0.4s;}
+.bike-card:nth-child(1){animation-delay:0.05s;}
+.bike-card:nth-child(2){animation-delay:0.1s;}
+.bike-card:nth-child(3){animation-delay:0.15s;}
+.bike-card:nth-child(4){animation-delay:0.2s;}
+.bike-card:nth-child(5){animation-delay:0.25s;}
+.bike-card:nth-child(6){animation-delay:0.3s;}
+
+@keyframes cardReveal {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.car-card:hover, .bike-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.car-card img, .bike-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.car-card:hover img, .bike-card:hover img {
+    transform: scale(1.05);
+}
+
+.car-info, .bike-info {
+    padding: 12px;
+}
+
+.car-info h3, .bike-info h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.price {
+    color: #d4af37;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.car-info p, .bike-info p {
+    font-size: 13px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.car-info button, .bike-info button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    background: #111;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 13px;
+}
+
+.car-info button:hover, .bike-info button:hover {
+    background: #d4af37;
+    color: #111;
+    transform: scale(1.02);
+}
+
+.motorcycles-section {
+    background: #0a0a0a;
+}
+
+.motorcycles-section .section-title h2 {
+    color: white;
+}
+
+.motorcycles-section .section-title p {
+    color: #bbb;
+}
+
+.bike-card {
+    background: #151515;
+    border: 1px solid #2a2a2a;
+}
+
+.bike-card .bike-info h3 {
+    color: white;
+}
+
+.bike-card .bike-info p {
+    color: #aaa;
+}
+
+.bike-card .price {
+    color: #d4af37;
+}
+
+.bike-card button {
+    background: #d4af37;
+    color: #111;
+}
+
+.bike-card button:hover {
+    background: white;
+    color: #111;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    background: #0d0d0d;
+    color: #d4af37;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.close {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    font-size: 13px;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+}
+
+.payment-option.selected {
+    border-color: #d4af37;
+    background: #fef9e6;
+}
+
+.payment-option input {
+    width: auto;
+    margin-right: 10px;
+}
+
+.payment-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.payment-summary {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.payment-summary p {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.total-price {
+    font-size: 22px;
+    color: #d4af37;
+    font-weight: bold;
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 12px;
+    background: #d4af37;
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.payment-details-section {
+    display: none;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+}
+
+.payment-details-section.show {
+    display: block;
+}
+
+.bank-details {
+    background: #e8f4f8;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+    display: none;
+}
+
+.bank-details.show {
+    display: block;
+}
+
+.bank-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.bank-btn {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+}
+
+.bank-btn.selected {
+    border-color: #d4af37;
+    background: #d4af37;
+    color: white;
+}
+
+.customer-account {
+    margin-top: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    display: none;
+}
+
+.customer-account input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 5px;
+    z-index: 1001;
+    display: none;
+    font-size: 13px;
+}
+
+.history-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #0d0d0d;
+    border-radius: 40px;
+    padding: 10px 18px;
+    z-index: 99;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid #d4af37;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-panel:hover {
+    transform: scale(1.05);
+    background: #1a1a1a;
+}
+
+.history-icon { font-size: 18px; }
+.history-text { color: white; font-size: 12px; }
+.history-count {
+    background: #d4af37;
+    color: #111;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.cart-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4af37;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 99;
+    transition: 0.3s;
+}
+
+.cart-icon:hover { transform: scale(1.1); }
+.cart-icon span {
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+}
+
+.history-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    overflow-y: auto;
+}
+
+.history-modal-content {
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 15px;
+    border: 2px solid #d4af37;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.history-modal-header {
+    background: #d4af37;
+    padding: 15px;
+    border-radius: 13px 13px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-modal-header h2 {
+    color: #111;
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-history {
+    color: #111;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.history-modal-body { padding: 15px; }
+
+.order-card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-left: 3px solid #d4af37;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.order-id { color: #d4af37; font-weight: bold; font-size: 12px; }
+.order-date { color: #888; font-size: 10px; }
+
+.order-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.order-detail-item { color: white; }
+.order-detail-label { color: #d4af37; font-size: 10px; margin-bottom: 3px; }
+.order-detail-value { font-size: 12px; font-weight: bold; }
+
+.empty-orders {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+    font-size: 14px;
+}
+
+.clear-history-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.clear-history-btn:hover { background: #cc0000; }
+
+footer {
+    background: #0d0d0d;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    nav { flex-direction: column; gap: 10px; padding: 12px 5%; }
+    .logo { font-size: 22px; }
+    nav ul { gap: 8px; justify-content: center; }
+    nav ul li a { padding: 6px 10px; font-size: 12px; }
+    .video-header { height: 40vh; min-height: 250px; }
+    .header-overlay h1 { font-size: 24px; }
+    .header-overlay p { font-size: 12px; }
+    .section-title h2 { font-size: 26px; }
+    .filters button { padding: 6px 12px; font-size: 12px; }
+    .cars-grid, .bikes-grid { gap: 15px; }
+    .history-panel { bottom: 80px; left: 15px; padding: 8px 14px; }
+    .cart-icon { bottom: 80px; right: 15px; width: 45px; height: 45px; }
+}
+
+@media (max-width: 480px) {
+    .video-header { height: 35vh; min-height: 200px; }
+    .header-overlay h1 { font-size: 18px; }
+    .section-title h2 { font-size: 22px; }
+    .filters button { padding: 5px 10px; font-size: 11px; }
+    .cars-grid, .bikes-grid { grid-template-columns: 1fr; gap: 15px; }
+    .history-panel { bottom: 70px; left: 10px; padding: 6px 12px; }
+    .cart-icon { bottom: 70px; right: 10px; width: 40px; height: 40px; }
+    .bank-buttons { grid-template-columns: 1fr; }
+    footer { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<script>
+(function checkAuthAndRedirect() {
+    const isLoggedIn = localStorage.getItem("eliteMotorsLoggedIn");
+    if (isLoggedIn !== "true") {
+        window.location.href = "Login.html";
+    }
+})();
+
+function logout() {
+    localStorage.removeItem("eliteMotorsLoggedIn");
+    localStorage.removeItem("eliteMotorsUser");
+    localStorage.removeItem("eliteMotorsEmail");
+    window.location.href = "Login.html";
+}
+
+function displayWelcome() {
+    const userName = localStorage.getItem("eliteMotorsUser");
+    const navUl = document.querySelector('nav ul');
+    if (userName && navUl) {
+        const welcomeDiv = document.createElement('div');
+        welcomeDiv.className = 'user-welcome';
+        welcomeDiv.innerHTML = `<span>👋 Welcome, ${userName}!</span><button class="logout-btn" onclick="logout()">Logout</button>`;
+        navUl.appendChild(welcomeDiv);
+    }
+}
+</script>
+
+<nav>
+<div class="logo">💰 Elite Motors</div>
+<ul>
+ <li><a href="login.html">🔑 LOGIN</a></li> 
+<li><a href="Home.html">🏠 HOME</a></li>
+<li><a href="Cars&Motorbike.html" class="active">🚗 CARS & BIKES</a></li>
+<li><a href="About us.html">ℹ️ ABOUT US</a></li>
+<li><a href="Contact.html">📞 CONTACT</a></li>
+</ul>
+</nav>
+
+<script>displayWelcome();</script>
+
+<div class="video-header">
+    <video id="realCarVideo" autoplay muted loop playsinline>
+        <source src="bm.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="header-overlay">
+        <h1>✨ Elite Motors Collection ✨</h1>
+        <p>🏎️ Luxury Cars | 🏍️ Hyperbikes | Feel the Power 🏎️</p>
+    </div>
+</div>
+
+<section>
+<div class="section-title">
+    <h2>🔥 Luxury Performance Cars</h2>
+    <p>Experience engineering excellence and timeless design</p>
+</div>
+<div class="filters">
+    <button onclick="filterCars('all')">🔥 All Cars</button>
+    <button onclick="filterCars('bmw')">🇩🇪 BMW</button>
+    <button onclick="filterCars('mercedes')">⭐ Mercedes</button>
+    <button onclick="filterCars('range')">🏔️ Range Rover</button>
+    <button onclick="filterCars('audi')">🚀 Audi</button>
+    <button onclick="filterCars('lamborghini')">🐂 Lamborghini</button>
+</div>
+
+<div class="cars-grid" id="carsGrid">
+    <div class="car-card bmw"><img src="https://cdn.motor1.com/images/mgl/GGzMG/s1/2021-bmw-m4-coupe-rendering-by-motor1.com.jpg" alt="BMW M4 Coupe"><div class="car-info"><h3>🏁 BMW M4 Coupe</h3><p class="price">💰 $72,000</p><p>Sport performance coupe with powerful engine.</p><button onclick="openTransaction('car', 'BMW M4 Coupe', 72000)">💳 Buy Now</button></div></div>
+    <div class="car-card mercedes"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsRJVWqCAicIYhq7FYOTuCrxrgVCAOvZWf5w&s" alt="Mercedes C-Class"><div class="car-info"><h3>⭐ Mercedes-Benz C-Class</h3><p class="price">💰 $55,000</p><p>Luxury sedan with modern technology.</p><button onclick="openTransaction('car', 'Mercedes-Benz C-Class', 55000)">💳 Buy Now</button></div></div>
+    <div class="car-card range"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" alt="Range Rover Sport"><div class="car-info"><h3>🏔️ Range Rover Sport</h3><p class="price">💰 $85,000</p><p>Luxury SUV with exceptional off-road ability.</p><button onclick="openTransaction('car', 'Range Rover Sport', 85000)">💳 Buy Now</button></div></div>
+    <div class="car-card audi"><img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a" alt="Audi A6"><div class="car-info"><h3>🚀 Audi A6</h3><p class="price">💰 $60,000</p><p>Elegant sedan with smooth performance.</p><button onclick="openTransaction('car', 'Audi A6', 60000)">💳 Buy Now</button></div></div>
+    <div class="car-card bmw"><img src="https://hips.hearstapps.com/hmg-prod/images/2024-bmw-x5-m60i-134-6602d491051b2.jpg" alt="BMW X5"><div class="car-info"><h3>🏁 BMW X5</h3><p class="price">💰 $68,000</p><p>Luxury SUV combining comfort and power.</p><button onclick="openTransaction('car', 'BMW X5', 68000)">💳 Buy Now</button></div></div>
+    <div class="car-card mercedes"><img src="https://www.thedrive.com/wp-content/uploads/2022/07/21/2021-Mercedes-AMG-GT-Stealth-Edition.jpg" alt="Mercedes AMG GT"><div class="car-info"><h3>⭐ Mercedes AMG GT</h3><p class="price">💰 $95,000</p><p>High-performance sports car.</p><button onclick="openTransaction('car', 'Mercedes AMG GT', 95000)">💳 Buy Now</button></div></div>
+    <div class="car-card lamborghini"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7xdDf0btbfLxb1iEIAzumk2QFvtLlCQQmOg&s" alt="Lamborghini Veneno"><div class="car-info"><h3>🐂 Lamborghini Veneno</h3><p class="price">💰 $4,500,000</p><p>High-performance luxury hypercar.</p><button onclick="openTransaction('car', 'Lamborghini Veneno', 4500000)">💳 Buy Now</button></div></div>
+    <div class="car-card lamborghini"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8KjQRs0TKxCbBmy95B0-mhMVBJmQh4TglHw&s" alt="Lamborghini Huracan"><div class="car-info"><h3>🐂 Lamborghini Huracan</h3><p class="price">💰 $5,500,000</p><p>Anticipates driver's behavior and desires.</p><button onclick="openTransaction('car', 'Lamborghini Huracan', 5500000)">💳 Buy Now</button></div></div>
+</div>
+</section>
+
+<section class="motorcycles-section">
+<div class="section-title"><h2>🏍️ Hyperbike Collection</h2><p>Unleash raw power on two wheels</p></div>
+<div class="filters">
+    <button onclick="filterBikes('all')">🔥 All Bikes</button>
+    <button onclick="filterBikes('ducati')">🇮🇹 Ducati</button>
+    <button onclick="filterBikes('bmw')">🇩🇪 BMW</button>
+    <button onclick="filterBikes('kawasaki')">🇯🇵 Kawasaki</button>
+    <button onclick="filterBikes('yamaha')">🇯🇵 Yamaha</button>
+    <button onclick="filterBikes('suzuki')">🇯🇵 Suzuki</button>
+    <button onclick="filterBikes('aprilia')">🇮🇹 Aprilia</button>
+</div>
+<div class="bikes-grid" id="bikesGrid">
+    <div class="bike-card ducati"><img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800" alt="Ducati Panigale V4"><div class="bike-info"><h3>🏍️ Ducati Panigale V4</h3><p class="price">💰 $39,800</p><p>214 hp | 1,103cc V4 | 186 mph</p><button onclick="openTransaction('bike', 'Ducati Panigale V4', 39800)">💳 Buy Now</button></div></div>
+    <div class="bike-card bmw"><img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800" alt="BMW S1000RR"><div class="bike-info"><h3>🏍️ BMW S1000RR</h3><p class="price">💰 $28,995</p><p>205 hp | 999cc I4 | 188 mph</p><button onclick="openTransaction('bike', 'BMW S1000RR', 28995)">💳 Buy Now</button></div></div>
+    <div class="bike-card kawasaki"><img src="https://global-fs.webike-cdn.net/@japan/magazine/wp-content/uploads/2024/03/H2pro_1.jpg" alt="Kawasaki Ninja H2"><div class="bike-info"><h3>🏍️ Kawasaki Ninja H2</h3><p class="price">💰 $55,000</p><p>310 hp | Supercharged | 209+ mph</p><button onclick="openTransaction('bike', 'Kawasaki Ninja H2', 55000)">💳 Buy Now</button></div></div>
+    <div class="bike-card yamaha"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbGCdGLFabfLIKc-wUxKM_eobHxTQC4dP7nA&s" alt="Yamaha R1M"><div class="bike-info"><h3>🏍️ Yamaha R1M</h3><p class="price">💰 $29,999</p><p>197 hp | 998cc CP4 | 186 mph</p><button onclick="openTransaction('bike', 'Yamaha R1M', 29999)">💳 Buy Now</button></div></div>
+    <div class="bike-card suzuki"><img src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?w=800" alt="Suzuki GSX-R1000R"><div class="bike-info"><h3>🏍️ Suzuki GSX-R1000R</h3><p class="price">💰 $24,500</p><p>199 hp | 999cc I4 | 185 mph</p><button onclick="openTransaction('bike', 'Suzuki GSX-R1000R', 24500)">💳 Buy Now</button></div></div>
+    <div class="bike-card aprilia"><img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=800" alt="Aprilia RSV4"><div class="bike-info"><h3>🏍️ Aprilia RSV4 Factory</h3><p class="price">💰 $26,500</p><p>217 hp | 1,099cc V4 | 190 mph</p><button onclick="openTransaction('bike', 'Aprilia RSV4 Factory', 26500)">💳 Buy Now</button></div></div>
+</div>
+</section>
+
+<div id="transactionModal" class="modal">
+<div class="modal-content">
+<div class="modal-header"><h2>💳 Complete Your Purchase</h2><span class="close" onclick="closeModal()">&times;</span></div>
+<div class="modal-body">
+<div class="payment-summary"><p><strong>🚗 Item:</strong> <span id="itemName"></span></p><p><strong>💰 Price:</strong> $<span id="itemPrice"></span></p><p><strong>💵 Tax (10%):</strong> $<span id="taxAmount"></span></p><p><strong>📦 Delivery Fee:</strong> $500</p><p><strong>🎯 Total:</strong> <span class="total-price">$<span id="totalAmount"></span></span></p></div>
+<div class="form-group"><label>👤 Full Name</label><input type="text" id="fullName" placeholder="John Doe" required></div>
+<div class="form-group"><label>📧 Email</label><input type="email" id="email" placeholder="john@example.com" required></div>
+<div class="form-group"><label>📱 Phone</label><input type="tel" id="phone" placeholder="+251 912 345 678" required></div>
+<div class="form-group"><label>💳 Payment Method</label>
+<div class="payment-methods">
+    <!-- Credit card -->
+<div class="payment-option" onclick="selectPayment('credit')">
+    <input type="radio" name="paymentMethod" value="credit" id="creditCard" checked>
+    <span class="payment-icon">💳</span>
+    <label>Credit Card</label>
+</div>
+<!-- Debit card -->
+<div class="payment-option" onclick="selectPayment('debit')">
+    <input type="radio" name="paymentMethod" value="debit" id="debitCard">
+    <span class="payment-icon">💎</span>
+    <label>Debit Card</label></div>
+<!-- PayPal -->
+<div class="payment-option" onclick="selectPayment('paypal')">
+    <input type="radio" name="paymentMethod" value="paypal" id="paypal">
+    <span class="payment-icon">🅿️</span>
+    <label>PayPal</label></div>
+<!-- Bank Transfer -->
+<div class="payment-option" onclick="selectPayment('bank')">
+    <input type="radio" name="paymentMethod" value="bank" id="bankTransfer">
+    <span class="payment-icon">🏦</span>
+    <label>Bank Transfer</label></div>
+<!-- Telebirr -->
+<div class="payment-option" onclick="selectPayment('telebirr')">
+    <input type="radio" name="paymentMethod" value="telebirr" id="telebirr">
+    <span class="payment-icon">📱</span>
+    <label>Telebirr</label></div>
+</div></div>
+
+<!-- Credit Card Details -->
+<div id="creditCardDetails" class="payment-details-section">
+    <h4 style="margin-bottom:10px;">💳 Credit Card Details</h4>
+    <div class="form-group"><label>Card Number</label><input type="text" id="creditCardNumber" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div class="form-group"><label>Expiry Date</label><input type="text" id="creditExpiry" placeholder="MM/YY" maxlength="5"></div>
+        <div class="form-group"><label>CVV</label><input type="text" id="creditCvv" placeholder="123" maxlength="4"></div>
+    </div>
+</div>
+
+<!-- Debit Card Details -->
+<div id="debitCardDetails" class="payment-details-section">
+    <h4 style="margin-bottom:10px;">💎 Debit Card Details</h4>
+    <div class="form-group"><label>Card Number</label><input type="text" id="debitCardNumber" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div class="form-group"><label>Expiry Date</label><input type="text" id="debitExpiry" placeholder="MM/YY" maxlength="5"></div>
+        <div class="form-group"><label>CVV</label><input type="text" id="debitCvv" placeholder="123" maxlength="4"></div>
+    </div>
+</div>
+
+<!-- PayPal Details (only email is needed) -->
+<div id="paypalDetails" class="payment-details-section">
+    <h4 style="margin-bottom:10px;">🅿️ PayPal Details</h4>
+    <div class="form-group"><label>PayPal Email</label><input type="email" id="paypalEmail" placeholder="your-email@paypal.com"></div>
+    <p style="font-size:12px; color:#666; margin-top:-8px;">You will be redirected to PayPal to complete payment.</p>
+</div>
+
+<div id="bankDetails" class="bank-details">
+    <h4>🏦 Ethiopian Banks</h4>
+    <div class="bank-buttons">
+        <button class="bank-btn" onclick="selectBank('dashen')">🏠Dashen</button>
+        <button class="bank-btn" onclick="selectBank('cbe')">🏠CBE</button>
+        <button class="bank-btn" onclick="selectBank('zemen')">🏠Zemen</button>
+        <button class="bank-btn" onclick="selectBank('anbessa')">🏠Anbessa</button>
+        <button class="bank-btn" onclick="selectBank('awash')">🏠Awash</button>
+        <button class="bank-btn" onclick="selectBank('nib')">🏠Nib</button></div>
+    <div id="bankAccountDetails"></div></div>
+
+<!-- Telebirr details -->
+<div id="telebirrDetails" class="bank-details" style="background: #e6f7ff;">
+    <h4>📱 Telebirr Payment</h4>
+    <p>After confirming, you will receive a Telebirr payment request to your registered number.</p>
+    <div class="form-group" style="margin-top:8px;"><label>📱 Telebirr Number</label><input type="tel" id="telebirrNumber" placeholder="09XX XXX XXX" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;"></div>
+</div>
+
+<div id="customerAccountDiv" class="customer-account"><label>🏦 Your Account Number</label><input type="text" id="customerAccountNumber" placeholder="Enter your account number"></div>
+<div class="form-group"><label>🏠 Delivery Address</label><input type="text" id="address" placeholder="Addis Ababa, Ethiopia" required></div>
+<button class="buy-btn" onclick="processPayment()">✅ Confirm Purchase</button>
+</div></div></div>
+
+<div id="successMessage" class="success-message">🎉 Purchase Successful!</div>
+<div class="history-panel" onclick="showOrderHistory()"><span class="history-icon">📋</span><span class="history-text">History</span><span class="history-count" id="historyCount">0</span></div>
+<div class="cart-icon" onclick="showCartSummary()">🛒 <span id="cartCount">0</span></div>
+
+<div id="historyModal" class="history-modal"><div class="history-modal-content"><div class="history-modal-header"><h2>📋 Your Order History</h2><span class="close-history" onclick="closeHistoryModal()">&times;</span></div><div class="history-modal-body" id="historyModalBody"></div></div></div>
+
+<footer>© 2026 Elite Motors | Luxury Cars & Hyperbikes Sales Center | 🚗 Your Dream Ride Awaits! 🏍️</footer>
+
+<script>
+function celebrateShake() {
+    document.body.classList.add('shake-celebrate');
+    const successMsg = document.getElementById('successMessage');
+    successMsg.classList.add('bounce-effect');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'confetti-particle';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = Math.random() * window.innerHeight + 'px';
+        particle.style.backgroundColor = ['#d4af37', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'][Math.floor(Math.random() * 6)];
+        particle.style.width = Math.random() * 12 + 4 + 'px';
+        particle.style.height = particle.style.width;
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 1500);
+    }
+    setTimeout(() => {
+        document.body.classList.remove('shake-celebrate');
+        successMsg.classList.remove('bounce-effect');
+    }, 1000);
+}
+
+let orderHistory = [], shoppingCart = [], currentItem = {type: "", name: "", price: 0}, selectedPayment = "credit", selectedBank = "";
+const bankAccounts = {
+    dashen: {name: "Dashen Bank", accountName: "Elite Motors PLC", accountNumber: "1000234567890"},
+    cbe: {name: "CBE", accountName: "Elite Motors PLC", accountNumber: "1000456789123"},
+    zemen: {name: "Zemen Bank", accountName: "Elite Motors PLC", accountNumber: "2100345678901"},
+    anbessa: {name: "Anbessa Bank", accountName: "Elite Motors PLC", accountNumber: "3200567890123"},
+    awash: {name: "Awash Bank", accountName: "Elite Motors PLC", accountNumber: "4300678901234"},
+    nib: {name: "Nib Bank", accountName: "Elite Motors PLC", accountNumber: "5400789012345"}
+};
+
+function loadOrderHistory() {
+    const saved = localStorage.getItem("eliteMotorsOrders");
+    if (saved) { orderHistory = JSON.parse(saved); updateHistoryCount(); }
+}
+function saveOrder(order) { orderHistory.unshift(order); localStorage.setItem("eliteMotorsOrders", JSON.stringify(orderHistory)); updateHistoryCount(); updateCartCount(); }
+function updateHistoryCount() { document.getElementById("historyCount").innerText = orderHistory.length; }
+function updateCartCount() { document.getElementById("cartCount").innerText = shoppingCart.length; }
+function showOrderHistory() {
+    const modalBody = document.getElementById("historyModalBody");
+    if (orderHistory.length === 0) { modalBody.innerHTML = `<div class="empty-orders">🛒 No orders yet!<br>Click "Buy Now" to make your first purchase!</div>`; }
+    else {
+        let totalSpent = 0, ordersHtml = '';
+        orderHistory.forEach((order) => {
+            totalSpent += order.totalAmountUSD;
+            ordersHtml += `<div class="order-card"><div class="order-header"><span class="order-id">#${order.id}</span><span class="order-date">📅 ${order.date}</span></div><div class="order-details"><div class="order-detail-item"><div class="order-detail-label">${order.type === 'car' ? '🚗 Car' : '🏍️ Bike'}</div><div class="order-detail-value">${order.itemName}</div></div><div class="order-detail-item"><div class="order-detail-label">💰 Total</div><div class="order-detail-value" style="color:#d4af37;">$${order.totalAmountUSD.toLocaleString()}</div></div><div class="order-detail-item"><div class="order-detail-label">👤 Customer</div><div class="order-detail-value">${order.customerName}</div></div><div class="order-detail-item"><div class="order-detail-label">💳 Payment</div><div class="order-detail-value">${order.paymentMethod}</div></div></div></div>`;
+        });
+        modalBody.innerHTML = `${ordersHtml}<div style="margin-top:15px;padding:12px;background:rgba(212,175,55,0.2);border-radius:10px;text-align:center;"><strong style="color:#d4af37;">💰 TOTAL SPENT: $${totalSpent.toLocaleString()}</strong><br><strong style="color:white;">📦 TOTAL ORDERS: ${orderHistory.length}</strong></div><button class="clear-history-btn" onclick="clearOrderHistory()">🗑️ Clear All History</button>`;
+    }
+    document.getElementById("historyModal").style.display = "block";
+}
+function closeHistoryModal() { document.getElementById("historyModal").style.display = "none"; }
+function clearOrderHistory() { if (confirm("⚠️ Are you sure you want to clear ALL order history?")) { orderHistory = []; localStorage.removeItem("eliteMotorsOrders"); updateHistoryCount(); updateCartCount(); showOrderHistory(); alert("✅ Order history cleared!"); } }
+function showCartSummary() { if (shoppingCart.length === 0) { alert("🛒 Cart is empty!"); return; } let summary = "🛒 CURRENT SESSION:\n\n"; shoppingCart.forEach((order, i) => { summary += `${i+1}. ${order.itemName} - $${order.totalAmountUSD.toLocaleString()}\n`; }); alert(summary); }
+function selectBank(bankKey) {
+    selectedBank = bankKey;
+    let bank = bankAccounts[bankKey];
+    let totalUSD = currentItem.price * 1.10 + 500;
+    let totalETB = totalUSD * 120;
+    document.querySelectorAll('.bank-btn').forEach(btn => btn.classList.remove('selected'));
+    event.target.classList.add('selected');
+    document.getElementById('customerAccountDiv').style.display = 'block';
+    document.getElementById('bankAccountDetails').innerHTML = `<p><strong>Receiver:</strong> ${bank.accountName}</p><p><strong>Bank:</strong> ${bank.name}</p><p><strong>Account:</strong> ${bank.accountNumber}</p><p><strong>Amount USD:</strong> $${totalUSD.toLocaleString()}</p><p><strong>Amount ETB:</strong> ${totalETB.toLocaleString()} ETB</p>`;
+}
+function selectPayment(method) {
+    // Update UI selection
+    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+    const clickedOption = event.currentTarget;
+    clickedOption.classList.add('selected');
+    const radio = clickedOption.querySelector('input[type="radio"]');
+    if (radio) radio.checked = true;
+    
+    // Hide all payment detail sections
+    document.getElementById('creditCardDetails').classList.remove('show');
+    document.getElementById('debitCardDetails').classList.remove('show');
+    document.getElementById('paypalDetails').classList.remove('show');
+    document.getElementById('bankDetails').classList.remove('show');
+    document.getElementById('telebirrDetails').style.display = 'none';
+    document.getElementById('customerAccountDiv').style.display = 'none';
+    
+    // Show relevant payment details
+    if (method === 'credit') {
+        document.getElementById('creditCardDetails').classList.add('show');
+    } else if (method === 'debit') {
+        document.getElementById('debitCardDetails').classList.add('show');
+    } else if (method === 'paypal') {
+        document.getElementById('paypalDetails').classList.add('show');
+    } else if (method === 'bank') {
+        document.getElementById('bankDetails').classList.add('show');
+        document.getElementById('customerAccountDiv').style.display = 'block';
+    } else if (method === 'telebirr') {
+        document.getElementById('telebirrDetails').style.display = 'block';
+    }
+    selectedPayment = method;
+}
+
+function filterCars(brand) { document.querySelectorAll(".car-card").forEach(card => { card.style.display = (brand === "all" || card.classList.contains(brand)) ? "flex" : "none"; }); }
+function filterBikes(brand) { document.querySelectorAll(".bike-card").forEach(card => { card.style.display = (brand === "all" || card.classList.contains(brand)) ? "flex" : "none"; }); }
+function openTransaction(type, name, price) {
+    currentItem = {type, name, price};
+    let tax = price * 0.10, total = price + tax + 500;
+    document.getElementById("itemName").innerHTML = name;
+    document.getElementById("itemPrice").innerHTML = price.toLocaleString();
+    document.getElementById("taxAmount").innerHTML = tax.toLocaleString();
+    document.getElementById("totalAmount").innerHTML = total.toLocaleString();
+    
+    // Clear all fields
+    document.getElementById("fullName").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("customerAccountNumber").value = "";
+    document.getElementById("telebirrNumber").value = "";
+    document.getElementById("creditCardNumber").value = "";
+    document.getElementById("creditExpiry").value = "";
+    document.getElementById("creditCvv").value = "";
+    document.getElementById("debitCardNumber").value = "";
+    document.getElementById("debitExpiry").value = "";
+    document.getElementById("debitCvv").value = "";
+    document.getElementById("paypalEmail").value = "";
+    document.getElementById("bankAccountDetails").innerHTML = "";
+    
+    // Reset UI - select Credit Card as default
+    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+    document.getElementById('creditCard').checked = true;
+    document.getElementById('creditCard').closest('.payment-option').classList.add('selected');
+    document.getElementById('creditCardDetails').classList.add('show');
+    document.getElementById('debitCardDetails').classList.remove('show');
+    document.getElementById('paypalDetails').classList.remove('show');
+    document.getElementById('bankDetails').classList.remove('show');
+    document.getElementById('telebirrDetails').style.display = 'none';
+    document.getElementById('customerAccountDiv').style.display = 'none';
+    document.querySelectorAll('.bank-btn').forEach(btn => btn.classList.remove('selected'));
+    selectedBank = "";
+    selectedPayment = "credit";
+    document.getElementById("transactionModal").style.display = "block";
+}
+function closeModal() { document.getElementById("transactionModal").style.display = "none"; }
+function processPayment() {
+    let fullName = document.getElementById("fullName").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let paymentMethod = "";
+    
+    // Determine payment method
+    if (document.getElementById("creditCard").checked) paymentMethod = "Credit Card";
+    else if (document.getElementById("debitCard").checked) paymentMethod = "Debit Card";
+    else if (document.getElementById("paypal").checked) paymentMethod = "PayPal";
+    else if (document.getElementById("bankTransfer").checked) paymentMethod = "Bank Transfer";
+    else if (document.getElementById("telebirr").checked) paymentMethod = "Telebirr";
+    
+    // Validate required fields
+    if (!fullName) { alert("⚠️ Please enter your full name!"); return; }
+    if (!email) { alert("⚠️ Please enter your email!"); return; }
+    if (!email.includes("@")) { alert("⚠️ Please enter a valid email!"); return; }
+    if (!phone) { alert("⚠️ Please enter your phone number!"); return; }
+    if (!address) { alert("⚠️ Please enter your delivery address!"); return; }
+    
+    // Validate Credit Card
+    if (paymentMethod === "Credit Card") {
+        let cardNum = document.getElementById("creditCardNumber").value.trim().replace(/\s/g, '');
+        let expiry = document.getElementById("creditExpiry").value.trim();
+        let cvv = document.getElementById("creditCvv").value.trim();
+        if (!cardNum || cardNum.length < 16) { alert("⚠️ Please enter a valid 16-digit credit card number!"); return; }
+        if (!expiry || expiry.length < 5) { alert("⚠️ Please enter a valid expiry date (MM/YY)!"); return; }
+        if (!cvv || cvv.length < 3) { alert("⚠️ Please enter a valid CVV!"); return; }
+    }
+    
+    // Validate Debit Card
+    if (paymentMethod === "Debit Card") {
+        let cardNum = document.getElementById("debitCardNumber").value.trim().replace(/\s/g, '');
+        let expiry = document.getElementById("debitExpiry").value.trim();
+        let cvv = document.getElementById("debitCvv").value.trim();
+        if (!cardNum || cardNum.length < 16) { alert("⚠️ Please enter a valid 16-digit debit card number!"); return; }
+        if (!expiry || expiry.length < 5) { alert("⚠️ Please enter a valid expiry date (MM/YY)!"); return; }
+        if (!cvv || cvv.length < 3) { alert("⚠️ Please enter a valid CVV!"); return; }
+    }
+    
+    // Validate PayPal - only email is required
+    if (paymentMethod === "PayPal") {
+        let paypalEmail = document.getElementById("paypalEmail").value.trim();
+        if (!paypalEmail || !paypalEmail.includes("@")) { 
+            alert("⚠️ Please enter a valid PayPal email address!"); 
+            return; 
+        }
+    }
+    
+    // Validate bank transfer
+    if (paymentMethod === "Bank Transfer" && !selectedBank) { 
+        alert("⚠️ Please select a bank!"); 
+        return; 
+    }
+    
+    // Validate Telebirr
+    if (paymentMethod === "Telebirr") {
+        let teleNum = document.getElementById("telebirrNumber").value.trim();
+        if (!teleNum || teleNum.length < 10) { 
+            alert("⚠️ Please enter a valid Telebirr number (e.g., 09XX XXX XXX)"); 
+            return; 
+        }
+    }
+    
+    // Calculate total
+    let totalUSD = currentItem.price * 1.10 + 500;
+    
+    // Create order
+    let order = { 
+        id: Math.floor(Math.random() * 1000000), 
+        type: currentItem.type, 
+        itemName: currentItem.name, 
+        itemPrice: currentItem.price, 
+        totalAmountUSD: totalUSD, 
+        totalAmountETB: totalUSD * 120, 
+        customerName: fullName, 
+        email: email, 
+        phone: phone, 
+        address: address, 
+        paymentMethod: paymentMethod, 
+        date: new Date().toLocaleString() 
+    };
+    
+    // Save order and update
+    saveOrder(order); 
+    shoppingCart.push(order); 
+    updateCartCount(); 
+    closeModal(); 
+    celebrateShake();
+    
+    // Show success message
+    document.getElementById("successMessage").style.display = "block";
+    setTimeout(() => document.getElementById("successMessage").style.display = "none", 3000);
+    
+    // Show confirmation alert
+    alert(`✅ PURCHASE CONFIRMED!\n\nOrder ID: #${order.id}\n${order.type === 'car' ? '🚗 Car' : '🏍️ Bike'}: ${order.itemName}\nPayment: ${paymentMethod}\nTotal: $${order.totalAmountUSD.toLocaleString()}\n\n🎉 Congratulations! Your dream ride is on its way! 🎉`);
+}
+window.onclick = function(event) { if (event.target == document.getElementById("transactionModal")) closeModal(); if (event.target == document.getElementById("historyModal")) closeHistoryModal(); }
+const video = document.getElementById('realCarVideo'); if(video) video.play().catch(e => console.log("Video autoplay prevented"));
+loadOrderHistory();
+</script>
+</body>
+</html>

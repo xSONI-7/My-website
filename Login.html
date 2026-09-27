@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Elite Motors | Login</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+}
+
+#bgVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.8));
+    z-index: -1;
+}
+
+/* Login Container */
+.login-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.login-box {
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 35px 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    text-align: center;
+    animation: fadeInUp 0.6s ease;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    max-width: 450px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #d4af37;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    font-size: 11px;
+    display: block;
+    color: #888;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.login-box h2 {
+    font-size: 26px;
+    color: #1e1e1e;
+    margin-bottom: 5px;
+}
+
+.login-subtitle {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+    font-size: 13px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background: white;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.input-group input.error-input {
+    border-color: #dc3545;
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+    20%, 40%, 60%, 80% { transform: translateX(3px); }
+}
+
+.name-validation-hint {
+    font-size: 10px;
+    color: #888;
+    margin-top: 5px;
+    display: block;
+}
+
+.name-validation-hint.error {
+    color: #dc3545;
+}
+
+.name-validation-hint.valid {
+    color: #28a745;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: #d4af37;
+    color: #111;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.login-btn:hover {
+    background: #b8962f;
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+}
+
+.login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.demo-info {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #eee;
+}
+
+.demo-info p {
+    color: #888;
+    font-size: 11px;
+    margin: 4px 0;
+}
+
+.demo-info .demo-credentials {
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.demo-credentials code {
+    display: block;
+    color: #d4af37;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.demo-credentials code:hover {
+    background: #e0e0e0;
+}
+
+.error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 18px;
+    display: none;
+    line-height: 1.4;
+}
+
+.success-message {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 18px;
+    display: none;
+    line-height: 1.4;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 15px;
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    padding-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+    .login-container {
+        padding: 20px 15px;
+    }
+    .login-box {
+        padding: 25px 20px;
+        margin: 10px auto;
+    }
+    .logo {
+        font-size: 28px;
+    }
+    .login-box h2 {
+        font-size: 22px;
+    }
+    .input-group input {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    .login-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .login-box {
+        padding: 20px 15px;
+    }
+    .logo {
+        font-size: 24px;
+    }
+    .login-box h2 {
+        font-size: 20px;
+    }
+    .demo-credentials code {
+        font-size: 10px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Video Background -->
+<div class="video-background">
+    <video id="bgVideo" autoplay muted loop playsinline>
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+</div>
+<div class="video-overlay"></div>
+
+<div class="login-container">
+    <div class="login-box">
+        <div class="logo">💰 ELITE MOTORS <span>Luxury Cars & Hyperbikes</span></div>
+        <h2>Welcome Back</h2>
+        <p class="login-subtitle">Sign in to access your dashboard</p>
+        
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+        
+        <div class="input-group">
+            <label>👤 Your Name (Letters Only)</label>
+            <input type="text" id="userName" placeholder="Enter your full name (e.g., John Smith)" autocomplete="off">
+            <small class="name-validation-hint" id="nameHint">⚠️ Only letters A-Z and spaces allowed (no numbers or special characters)</small>
+        </div>
+        
+        <div class="input-group">
+            <label>📧 Email Address</label>
+            <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="off">
+        </div>
+        
+        <div class="input-group">
+            <label>🔒 Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password">
+        </div>
+        
+        <button class="login-btn" id="loginBtn" onclick="processLogin()">🔐 Sign In →</button>
+        
+        <div class="demo-info">
+            <p>✨ Demo Access (Click to auto-fill) ✨</p>
+            <div class="demo-credentials">
+                <code onclick="fillDemo('John Smith', 'demo@elitemotors.com', 'demo123')">👤 Name: John Smith</code>
+                <code onclick="fillDemo('John Smith', 'demo@elitemotors.com', 'demo123')">📧 Email: demo@elitemotors.com</code>
+                <code onclick="fillDemo('John Smith', 'demo@elitemotors.com', 'demo123')">🔑 Password: demo123</code>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2026 Elite Motors | Your Dream Ride Awaits!</p>
+    </div>
+</div>
+
+<script>
+// DOM Elements
+const userNameInput = document.getElementById('userName');
+const loginEmail = document.getElementById('loginEmail');
+const loginPassword = document.getElementById('loginPassword');
+const loginBtn = document.getElementById('loginBtn');
+const nameHint = document.getElementById('nameHint');
+const errorDiv = document.getElementById('errorMessage');
+const successDiv = document.getElementById('successMessage');
+
+// Validate name: only letters and spaces
+function isValidName(name) {
+    if (!name || name.trim() === '') return false;
+    const nameRegex = /^[A-Za-z\s]+$/;
+    return nameRegex.test(name) && name.trim().length >= 2;
+}
+
+// Real-time name validation
+userNameInput.addEventListener('input', function() {
+    const name = this.value;
+    if (!name || name.trim() === '') {
+        nameHint.className = 'name-validation-hint error';
+        nameHint.innerHTML = '⚠️ Name is required';
+        this.style.borderColor = '#dc3545';
+    } else if (/^[A-Za-z\s]+$/.test(name) && name.trim().length >= 2) {
+        nameHint.className = 'name-validation-hint valid';
+        nameHint.innerHTML = '✓ Valid name (letters only)';
+        this.style.borderColor = '#28a745';
+    } else {
+        nameHint.className = 'name-validation-hint error';
+        nameHint.innerHTML = '❌ Only letters A-Z and spaces allowed! No numbers or special characters.';
+        this.style.borderColor = '#dc3545';
+    }
+});
+
+// Real-time email validation
+loginEmail.addEventListener('input', function() {
+    const email = this.value;
+    if (!email || email === '') {
+        this.style.borderColor = '#e0e0e0';
+    } else if (email.includes('@') && email.includes('.')) {
+        this.style.borderColor = '#28a745';
+    } else {
+        this.style.borderColor = '#dc3545';
+    }
+});
+
+// Real-time password validation
+loginPassword.addEventListener('input', function() {
+    const password = this.value;
+    if (!password || password === '') {
+        this.style.borderColor = '#e0e0e0';
+    } else if (password.length >= 4) {
+        this.style.borderColor = '#28a745';
+    } else {
+        this.style.borderColor = '#dc3545';
+    }
+});
+
+// Fill demo credentials
+function fillDemo(name, email, password) {
+    document.getElementById('userName').value = name;
+    document.getElementById('loginEmail').value = email;
+    document.getElementById('loginPassword').value = password;
+    
+    // Trigger validation
+    userNameInput.dispatchEvent(new Event('input'));
+    loginEmail.dispatchEvent(new Event('input'));
+    loginPassword.dispatchEvent(new Event('input'));
+    
+    showMessage('success', '✓ Demo credentials filled! Click "Sign In" to continue.');
+}
+
+// Show message
+function showMessage(type, message) {
+    if (type === 'error') {
+        errorDiv.style.display = 'block';
+        errorDiv.innerHTML = message;
+        successDiv.style.display = 'none';
+        setTimeout(() => {
+            errorDiv.style.display = 'none';
+        }, 4000);
+    } else {
+        successDiv.style.display = 'block';
+        successDiv.innerHTML = message;
+        errorDiv.style.display = 'none';
+        setTimeout(() => {
+            successDiv.style.display = 'none';
+        }, 3000);
+    }
+}
+
+// Show input error
+function showInputError(inputElement) {
+    inputElement.classList.add('error-input');
+    setTimeout(() => {
+        inputElement.classList.remove('error-input');
+    }, 500);
+}
+
+// Main login function
+function processLogin() {
+    const userName = document.getElementById("userName").value.trim();
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    
+    // Reset borders
+    userNameInput.style.borderColor = '#e0e0e0';
+    loginEmail.style.borderColor = '#e0e0e0';
+    loginPassword.style.borderColor = '#e0e0e0';
+    
+    // NAME VALIDATION (Letters only)
+    if (!userName) {
+        showMessage('error', "⚠️ Please enter your name!");
+        showInputError(userNameInput);
+        userNameInput.focus();
+        return;
+    }
+    
+    if (!/^[A-Za-z\s]+$/.test(userName)) {
+        showMessage('error', "❌ Invalid Name!<br><br>Please use only letters (A-Z, a-z) and spaces.<br>Numbers and special characters are NOT allowed.<br><br>Example: John Smith");
+        showInputError(userNameInput);
+        userNameInput.focus();
+        return;
+    }
+    
+    if (userName.length < 2) {
+        showMessage('error', "❌ Name must be at least 2 characters!");
+        showInputError(userNameInput);
+        userNameInput.focus();
+        return;
+    }
+    
+    // EMAIL VALIDATION
+    if (!email) {
+        showMessage('error', "⚠️ Please enter your email address!");
+        showInputError(loginEmail);
+        loginEmail.focus();
+        return;
+    }
+    
+    if (!email.includes("@") || !email.includes(".")) {
+        showMessage('error', "⚠️ Please enter a valid email address! (e.g., name@domain.com)");
+        showInputError(loginEmail);
+        loginEmail.focus();
+        return;
+    }
+    
+    // PASSWORD VALIDATION
+    if (!password) {
+        showMessage('error', "⚠️ Please enter your password!");
+        showInputError(loginPassword);
+        loginPassword.focus();
+        return;
+    }
+    
+    if (password.length < 4) {
+        showMessage('error', "❌ Password must be at least 4 characters!");
+        showInputError(loginPassword);
+        loginPassword.focus();
+        return;
+    }
+    
+    // Valid credentials (accept any non-empty values for demo)
+    // Also check against specific demo credentials
+    const isValidDemo = (email === "demo@elitemotors.com" && password === "demo123") ||
+                        (email === "admin@elitemotors.com" && password === "admin123") ||
+                        (email === "user@elitemotors.com" && password === "user123");
+    
+    // For demo purposes, accept any valid format (as long as email format is correct and password is 4+ chars)
+    // This ensures the login works
+    if (isValidDemo || (email.includes('@') && password.length >= 4)) {
+        // Store login info in localStorage
+        localStorage.setItem("eliteMotorsLoggedIn", "true");
+        localStorage.setItem("eliteMotorsUser", userName);
+        localStorage.setItem("eliteMotorsEmail", email);
+        localStorage.setItem("eliteMotorsLoginTime", new Date().toISOString());
+        
+        showMessage('success', `✅ Welcome, ${userName}! Login successful. Redirecting to Home...`);
+        
+        // Disable button to prevent double submission
+        loginBtn.disabled = true;
+        loginBtn.style.opacity = '0.6';
+        
+        // Redirect to home page
+        setTimeout(() => {
+            window.location.href = "Home.html";
+        }, 1500);
+    } else {
+        showMessage('error', "❌ Login failed! Invalid email or password.<br><br>📧 Demo credentials:<br>Email: demo@elitemotors.com<br>Password: demo123");
+        showInputError(loginEmail);
+        showInputError(loginPassword);
+        loginPassword.value = '';
+        loginPassword.focus();
+    }
+}
+
+// Check if user is already logged in
+function checkAuth() {
+    const isLoggedIn = localStorage.getItem("eliteMotorsLoggedIn");
+    if (isLoggedIn === "true") {
+        window.location.href = "Home.html";
+        return true;
+    }
+    return false;
+}
+
+// Ensure video plays
+const video = document.getElementById('bgVideo');
+if(video) {
+    video.play().catch(e => console.log("Video autoplay prevented, using fallback"));
+}
+
+// Add Enter key support
+function handleKeyPress(e) {
+    if (e.key === 'Enter') {
+        processLogin();
+    }
+}
+userNameInput.addEventListener('keypress', handleKeyPress);
+loginEmail.addEventListener('keypress', handleKeyPress);
+loginPassword.addEventListener('keypress', handleKeyPress);
+
+// Run auth check
+checkAuth();
+</script>
+</body>
+</html>
